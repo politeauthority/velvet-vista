@@ -3,3 +3,7 @@ kind: Kustomization
 namespace: velvet-vista-dev
 resources:
   - ../../base/
+images:
+  - name: politeauthority/velvet-vista
+    newName: harbor.squid-ink.us/politeauthority/velvet-vista
+    newTag: 0.0.0.1-dev

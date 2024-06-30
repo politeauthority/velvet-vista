@@ -29,8 +29,11 @@ tasks:
       - |
         NS=$"{{.K8S_NS_DEV}}"
         POD=$(kubectl get pods -n ${NS} --no-headers --field-selector=status.phase=Running | cut -d' ' -f1)
+        CONTAINER="velvet-vista"
         echo "Copying to pod $POD"
+        kubectl cp -n ${NS} ./configs/dev-config.yaml ${POD}:/configs/config.yaml
         kubectl cp -n ${NS} ./src ${POD}:/app
+        kubectl exec -it -c ${CONTAINER} -n ${NS} ${POD} -- /bin/velvet-build
     silent: True
 
   dev-exec:

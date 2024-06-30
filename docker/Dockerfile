@@ -21,9 +21,9 @@ RUN apk add --update --no-cache --virtual .build-deps \
     # Remove build dependencies
     && apk del .build-deps
 
+# App configuration
+RUN mkdir /configs
+ADD scripts/velvet-vista-build /bin/velvet-vista-build
 
+# Dev Tools
 RUN pip3 install --no-cache-dir -r /app/requirements-dev.txt
-# RUN sh /install-polite-lib.sh
-
-# # Set the default command to run the application
-# CMD ["gunicorn", "web-app:app", "--bind=0.0.0.0:80"]

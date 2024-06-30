@@ -15,8 +15,8 @@ spec:
       imagePullSecrets:
         - name: harbor-registry
       containers:
-        - name: 2fauth
-          image: harbor.squid-ink.us/politeauthority/velvet-vista:dev
+        - name: velvet-vista
+          image: politeauthority/velvet-vista:latest
           command: ["tail", "-f", "/dev/null"]
           env:
             - name: SONARR_URL

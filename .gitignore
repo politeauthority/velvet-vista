@@ -1,5 +1,5 @@
 ## Dev Secrets
-kubernetes-manifests/envs/dev/secret.yaml
+configs/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

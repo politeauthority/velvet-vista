@@ -1,0 +1,7 @@
+#!/bin/bash
+# Build Velvet Vista
+#
+cd /app/src/
+python3 setup.py build
+python3 setup.py install
+# End File: politeauthority/velvet-vista/docker/scripts/velvet-vista-build
