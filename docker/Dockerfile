@@ -9,6 +9,7 @@ WORKDIR /app
 
 # Copy the local src directory to the working directory in the container
 ADD ./src /app
+RUN mkdir /configs
 
 # Install apk requirements
 RUN apk add --update --no-cache --virtual .build-deps \
@@ -21,10 +22,7 @@ RUN apk add --update --no-cache --virtual .build-deps \
     # Remove build dependencies
     && apk del .build-deps
 
-# App configuration
-RUN mkdir /configs
-ADD scripts/velvet-vista-build /bin/velvet-vista-build
-RUN apk add --update --no-cache vim bash
-
 # Dev Tools
 RUN pip3 install --no-cache-dir -r /app/requirements-dev.txt
+ADD scripts/velvet-vista-build /bin/velvet-vista-build
+RUN apk add --update --no-cache vim bash

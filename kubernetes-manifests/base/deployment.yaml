@@ -18,14 +18,21 @@ spec:
         - name: velvet-vista
           image: politeauthority/velvet-vista:latest
           command: ["tail", "-f", "/dev/null"]
-          env:
-            - name: SONARR_URL
-              valueFrom:
-                secretKeyRef:
-                  key: SONARR_URL
-                  name: velvet-vista-keys
-            - name: SONNAR_API_KEY
-              valueFrom:
-                secretKeyRef:
-                  key: SONNAR_API_KEY
-                  name: velvet-vista-keys
+      #     volumeMounts:
+      #       - name: velvet-vista-config
+      #         mountPath: "/configs/"
+      #         readOnly: false
+      #     # env:
+      #     #   - name: SONARR_URL
+      #     #     valueFrom:
+      #     #       secretKeyRef:
+      #     #         key: SONARR_URL
+      #     #         name: velvet-vista-keys
+
+      # volumes:
+      #   - name: velvet-vista-config
+      #     secret:
+      #       secretName: quigley-config
+      #       items:
+      #         - key: quigley_config
+      #           path: config.yaml
