@@ -1,0 +1,17 @@
+version: "3"
+vars:
+  K8S_NS: "quigley-api"
+  K8S_NS_DEV: "velvet-vista-dev"
+
+tasks:
+  build-and-push:
+    cmds:
+      - |
+        # VERSION_FILE="src/version.py"
+        # VERSION=$(grep -o 'version = "[^"]*"' ${VERSION_FILE} | cut -d '"' -f 2)
+        VERSION="dev"
+        cp -r src docker/
+        docker build -t harbor.squid-ink.us/politeauthority/velvet-vista:${VERSION} --no-cache docker/
+        rm -rf docker/src
+        docker push harbor.squid-ink.us/politeauthority/velvet-vista:${VERSION}
+    silent: True
