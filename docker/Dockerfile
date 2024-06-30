@@ -16,12 +16,13 @@ RUN apk add --update --no-cache --virtual .build-deps \
     && apk add --no-cache libffi-dev \
     && apk add --no-cache --update --virtual .runtime-deps \
     libgcc libstdc++ ca-certificates \
-    # Add the script to install Polite-Lib \
     # Install Python dependencies
-    #&& pip3 install --no-cache-dir -r /app/requirements.txt i\
+    && pip3 install --no-cache-dir -r /app/requirements.txt \
     # Remove build dependencies
     && apk del .build-deps
 
+
+RUN pip3 install --no-cache-dir -r /app/requirements-dev.txt
 # RUN sh /install-polite-lib.sh
 
 # # Set the default command to run the application

@@ -1,6 +1,6 @@
 version: "3"
 vars:
-  K8S_NS: "quigley-api"
+  K8S_NS: "velvet-vista"
   K8S_NS_DEV: "velvet-vista-dev"
 
 tasks:
@@ -14,4 +14,30 @@ tasks:
         docker build -t harbor.squid-ink.us/politeauthority/velvet-vista:${VERSION} --no-cache docker/
         rm -rf docker/src
         docker push harbor.squid-ink.us/politeauthority/velvet-vista:${VERSION}
+    silent: True
+
+  dev-deploy:
+    cmds:
+      - echo "Deploying Velvet Vist dev"
+      - |
+        kustomize build kubernetes-manifests/envs/dev | kubectl apply -f -
+      - echo "Success"
+
+  dev-cp:
+    cmds:
+      - |
+        NS=$"{{.K8S_NS_DEV}}"
+        POD=$(kubectl get pods -n ${NS} --no-headers --field-selector=status.phase=Running | cut -d' ' -f1)
+        echo "Copying to pod $POD"
+        kubectl cp -n ${NS} ./src ${POD}:/app
+    silent: True
+
+  dev-exec:
+    cmds:
+      - |
+        NS=$"{{.K8S_NS_DEV}}"
+        POD=$(kubectl get pods -n ${NS} --no-headers --field-selector=status.phase=Running | cut -d' ' -f1)
+        echo $POD
+        echo "Exec to pod $POD"
+        kubectl exec -n ${NS} -it ${POD} -- sh
     silent: True

@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: velvet-vista
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: velvet-vista
+  template:
+    metadata:
+      labels:
+        app: velvet-vista
+    spec:
+      imagePullSecrets:
+        - name: harbor-registry
+      containers:
+        - name: 2fauth
+          image: harbor.squid-ink.us/politeauthority/velvet-vista:dev
+          command: ["tail", "-f", "/dev/null"]
+          env:
+            - name: SONARR_URL
+              valueFrom:
+                secretKeyRef:
+                  key: SONARR_URL
+                  name: velvet-vista-keys
+            - name: SONNAR_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: SONNAR_API_KEY
+                  name: velvet-vista-keys
