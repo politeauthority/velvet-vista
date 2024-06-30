@@ -18,9 +18,9 @@ RUN apk add --update --no-cache --virtual .build-deps \
     libgcc libstdc++ ca-certificates \
     # Add the script to install Polite-Lib \
     # Install Python dependencies
-    && pip3 install --no-cache-dir -r /app/requirements.txt \
+    #&& pip3 install --no-cache-dir -r /app/requirements.txt i\
     # Remove build dependencies
-    && apk del .build-deps && pip install -r /app/requirements.txt
+    && apk del .build-deps
 
 # RUN sh /install-polite-lib.sh
 
