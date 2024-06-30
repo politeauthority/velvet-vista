@@ -10,8 +10,8 @@ import logging
 
 from utils import glow
 from utils import logger
-# from utils import web_tools
-from velvet_vista.modules.read_version import ReadVersion
+from velvet_vista.modules.read_local_version import ReadLocalVersion
+from velvet_vista.__version__ import version
 
 
 class VersionCheck:
@@ -21,7 +21,7 @@ class VersionCheck:
         logging.info("Logger setup")
 
     def run(self):
-        logging.info("Starting checks")
+        logging.info(f"Running Version Check: v{version}")
         service_name = "sonarr"
         service = glow.CONFIG["services"][service_name]
         self.check_service(service_name, service)
@@ -29,8 +29,8 @@ class VersionCheck:
         # self.get_local_version()
         # self.get_version_github()
 
-    def check_service(self, service: dict) -> bool:
-        read_version = ReadVersion().run(service)
+    def check_service(self, service_name: str, service_user: dict) -> bool:
+        read_version = ReadLocalVersion().run(service_name, service_user)
         print(read_version)
 
     def get_version_github(self):

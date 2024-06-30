@@ -33,7 +33,7 @@ tasks:
         echo "Copying to pod $POD"
         kubectl cp -n ${NS} ./configs/dev-config.yaml ${POD}:/configs/config.yaml
         kubectl cp -n ${NS} ./src ${POD}:/app
-        kubectl exec -it -c ${CONTAINER} -n ${NS} ${POD} -- /bin/velvet-build
+        kubectl exec -it -c ${CONTAINER} -n ${NS} ${POD} -- /bin/velvet-vista-build
     silent: True
 
   dev-exec:
