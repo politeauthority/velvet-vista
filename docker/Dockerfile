@@ -24,6 +24,7 @@ RUN apk add --update --no-cache --virtual .build-deps \
 # App configuration
 RUN mkdir /configs
 ADD scripts/velvet-vista-build /bin/velvet-vista-build
+RUN apk add --update --no-cache vim bash
 
 # Dev Tools
 RUN pip3 install --no-cache-dir -r /app/requirements-dev.txt
