@@ -15,8 +15,12 @@ class VersionCheck:
         print("getting version")
 
     def get_sonarr(self):
-        url = "https://github.com/Sonarr/Sonarr/releases"
-        
+        owner = "Sonarr"
+        repo = "Sonarr"
+        url = f"https://github.com/{owner}/{repo}/releases"
+        response = request.get(url)
+        import ipdb; ipdb.set_trace()
+
 
 
 if __name__ == "__main__":

@@ -7,13 +7,14 @@ tasks:
   build-and-push:
     cmds:
       - |
-        # VERSION_FILE="src/version.py"
-        # VERSION=$(grep -o 'version = "[^"]*"' ${VERSION_FILE} | cut -d '"' -f 2)
-        VERSION="dev"
+        VERSION_FILE="src/velvet-vista/__version__.py"
+        VERSION=$(grep -o 'version = "[^"]*"' ${VERSION_FILE} | cut -d '"' -f 2)
+        TAG="${VERSION}-dev"
+        DEV = "true"
         cp -r src docker/
-        docker build -t harbor.squid-ink.us/politeauthority/velvet-vista:${VERSION} --no-cache docker/
+        docker build -t harbor.squid-ink.us/politeauthority/velvet-vista:${TAG} --no-cache docker/
         rm -rf docker/src
-        docker push harbor.squid-ink.us/politeauthority/velvet-vista:${VERSION}
+        docker push harbor.squid-ink.us/politeauthority/velvet-vista:${TAG}
     silent: True
 
   dev-deploy:
