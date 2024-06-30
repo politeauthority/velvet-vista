@@ -7,10 +7,10 @@ tasks:
   build-and-push:
     cmds:
       - |
-        VERSION_FILE="src/velvet-vista/__version__.py"
+        VERSION_FILE="src/velvet_vista/__version__.py"
         VERSION=$(grep -o 'version = "[^"]*"' ${VERSION_FILE} | cut -d '"' -f 2)
+        echo $VERSION
         TAG="${VERSION}-dev"
-        DEV = "true"
         cp -r src docker/
         docker build -t harbor.squid-ink.us/politeauthority/velvet-vista:${TAG} --no-cache docker/
         rm -rf docker/src
