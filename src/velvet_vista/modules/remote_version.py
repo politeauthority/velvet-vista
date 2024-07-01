@@ -3,7 +3,9 @@
     Modules
     Remote Version
 
-    Get the remote version number of a given service.
+    Get the remote version number of a given service. 
+    Currenrtly we only support Github Releases.
+
 """
 
 import logging
@@ -29,14 +31,16 @@ class RemoteVersion:
         self.service_user = service
         self.service_base = SERVICES[self.service_name]
         logging.info(f"Getting upstream version of {self.service_name}")
-        self.response = self.get_version()
+        self.get_version()
+        return self.data
 
     def get_version(self):
         data = self.github_release_fetch()
         version = self.github_release_parse(data)
         return version
 
-    def github_release_fetch(self):
+    def github_release_fetch(self) -> dict:
+        """Get version data from Github Release pages."""
         owner = self.service_base["remotes"]["github_release"]["owner"]
         repo = self.service_base["remotes"]["github_release"]["repo"]
         url = f"https://api.github.com/repos/{owner}/{repo}/releases"
@@ -48,5 +52,7 @@ class RemoteVersion:
         versions = []
         for release in data:
             versions.append(release["name"])
+        self.data["latest"]["version"] = versions[0]
+        return True
                 
 # End File: politeauthority/velvet-vista/src/velvet-vista/modules/remote_version.py
