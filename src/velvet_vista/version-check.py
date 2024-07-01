@@ -8,8 +8,8 @@
 
 import logging
 
-from utils import glow
-from utils import logger
+from velvet_vista.utils import glow
+from velvet_vista.utils import logger
 from velvet_vista.modules.local_version import LocalVersion
 from velvet_vista.modules.remote_version import RemoteVersion
 from velvet_vista.__version__ import version
@@ -34,7 +34,7 @@ class VersionCheck:
         local_ver = LocalVersion().run(service_name, service_user)
         remote_ver = RemoteVersion().run(service_name, service_user)
         print(local_ver)
-        import ipdb; ipdb.set_trace()
+        print(remote_ver)
 
     def get_version_github(self):
         """

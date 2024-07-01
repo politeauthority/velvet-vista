@@ -1,4 +1,4 @@
-# Velvet Vista v 0.0.0.6
+# Velvet Vista v 0.0.0.7
 
 ## Supported Applications
  - Sonarr 

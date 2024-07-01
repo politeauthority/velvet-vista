@@ -3,7 +3,7 @@
     Modules
     Remote Version
 
-    Get the remote version number of a given service.2
+    Get the remote version number of a given service.
 """
 
 import logging
@@ -15,6 +15,12 @@ from velvet_vista.services import SERVICES
 
 
 class RemoteVersion:
+
+    def __init__(self):
+        self.data = {
+            "current": {},
+            "latest": {}
+        }
 
     def run(self, name: str, service: dict) -> dict:
         """Primary entrypoint for RemoteVersion.
@@ -28,6 +34,7 @@ class RemoteVersion:
     def get_version(self):
         data = self.github_release_fetch()
         version = self.github_release_parse(data)
+        return version
 
     def github_release_fetch(self):
         owner = self.service_base["remotes"]["github_release"]["owner"]
@@ -42,19 +49,4 @@ class RemoteVersion:
         for release in data:
             versions.append(release["name"])
                 
-        import ipdb; ipdb.set_trace()
-
-    # def parse_response(self) -> str:
-    #     """
-    #     @todo: Make this understand where to parse.
-    #     """
-    #     rj = self.response.json()
-    #     data = rj[0]
-    #     if "version" not in data:
-    #         error_msg = "Parse - could not find version path in response - "
-    #         error_msg += f"{self.response.status_code}"
-    #         logging.error(error_msg)
-    #         return False
-    #     return data["version"]
-
 # End File: politeauthority/velvet-vista/src/velvet-vista/modules/remote_version.py

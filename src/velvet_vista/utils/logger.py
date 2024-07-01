@@ -22,7 +22,7 @@ class CustomFormatter(logging.Formatter):
 def setup_logger():
     # Create a logging instance
     logger = logging.getLogger()
-    logger.setLevel(logging.INFO)
+    logger.setLevel(logging.DEBUG)
 
     # Create a file handler and set the level to INFO
     # file_handler = logging.FileHandler('app.log')

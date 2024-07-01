@@ -27,7 +27,7 @@ class LocalVersion:
             logging.error(f"Failed to get version info from {name}")
             return False
         else:
-            logging.info(f"{self.service_name} response {self.response.status_code}")
+            logging.debug(f"{self.service_name} response {self.response.status_code}")
         parsed = self.parse_response()
         if not parsed:
             logging.error("Failed - {self.service_name}")
@@ -35,6 +35,7 @@ class LocalVersion:
         version = {
             "raw": parsed
         }
+        logging.info(f"{self.service_name} - Local Version: {version['raw']}")
         return version
 
     def get_version(self):
