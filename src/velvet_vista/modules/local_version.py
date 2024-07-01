@@ -1,7 +1,8 @@
 """
     Velvet Vista
     Modules
-    Read Version
+    Local Version
+
 """
 
 import logging
@@ -9,20 +10,14 @@ import logging
 # from glom import glom
 
 from velvet_vista.utils import web_tools
-
-SERVICES = {
-    "sonarr": {
-        "name": "sonarr",
-        "url": "api/v3/update",
-        "json_path": "[0].version",
-        "reponse_type": "json"
-    }
-}
+from velvet_vista.services import SERVICES
 
 
-class ReadLocalVersion:
+class LocalVersion:
 
-    def run(self, name: str, service: dict):
+    def run(self, name: str, service: dict) -> dict:
+        """Primary entrypoint for ReadLocalVersion.
+        """
         self.service_name = name
         self.service_user = service
         self.service_base = SERVICES[self.service_name]
@@ -34,7 +29,13 @@ class ReadLocalVersion:
         else:
             logging.info(f"{self.service_name} response {self.response.status_code}")
         parsed = self.parse_response()
-        print(parsed)
+        if not parsed:
+            logging.error("Failed - {self.service_name}")
+            return False
+        version = {
+            "raw": parsed
+        }
+        return version
 
     def get_version(self):
         url = web_tools.url_concat([self.service_user["api_url"], self.service_base["url"]])
@@ -61,4 +62,4 @@ class ReadLocalVersion:
             return False
         return data["version"]
 
-# End File: politeauthority/velvet-vista/src/velvet-vista/modules/read_version.py
+# End File: politeauthority/velvet-vista/src/velvet-vista/modules/local_version.py

@@ -10,7 +10,7 @@ import logging
 
 from utils import glow
 from utils import logger
-from velvet_vista.modules.read_local_version import ReadLocalVersion
+from velvet_vista.modules.local_version import LocalVersion
 from velvet_vista.__version__ import version
 
 
@@ -30,8 +30,9 @@ class VersionCheck:
         # self.get_version_github()
 
     def check_service(self, service_name: str, service_user: dict) -> bool:
-        read_version = ReadLocalVersion().run(service_name, service_user)
-        print(read_version)
+        local_ver = LocalVersion().run(service_name, service_user)
+        print(local_ver)
+        import ipdb; ipdb.set_trace()
 
     def get_version_github(self):
         """
