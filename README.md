@@ -1,4 +1,7 @@
-# Velvet Vista v 0.0.0.5
+# Velvet Vista v 0.0.0.6
+
+## Supported Applications
+ - Sonarr 
 
 ## Development
 ### Update Version Numbers

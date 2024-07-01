@@ -13,9 +13,10 @@ import logging
 class CustomFormatter(logging.Formatter):
     def format(self, record):
         log_time = self.formatTime(record, "%Y-%m-%d %H:%M:%S")
-        log_file = record.filename
+        # log_file = record.filename
         log_level = record.levelname
-        return f"{log_time} - {log_file} - {log_level}: {record.msg}"
+        return f"{log_time} - {log_level}: {record.msg}"
+        # return f"{log_time} - {log_file} - {log_level}: {record.msg}"
 
 
 def setup_logger():

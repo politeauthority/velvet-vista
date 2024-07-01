@@ -8,7 +8,7 @@ import logging
 import requests
 
 
-def make_request(url: str, headers: dict) -> dict:
+def make_request(url: str, headers: dict = {}) -> dict:
     """Make a generic request, catching the errors we can anticipate.
     """
     logging.info(f"Fetching url: {url}")
