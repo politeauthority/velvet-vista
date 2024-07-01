@@ -4,10 +4,12 @@
     Logger
 
     Custom logger for handling log events.
- 
+
 """
 
 import logging
+
+LOG_LEVEL = logging.info
 
 
 class CustomFormatter(logging.Formatter):
@@ -24,7 +26,7 @@ class CustomFormatter(logging.Formatter):
 def setup_logger():
     # Create a logging instance
     logger = logging.getLogger()
-    logger.setLevel(logging.DEBUG)
+    logger.setLevel(LOG_LEVEL)
 
     # Create a file handler and set the level to INFO
     # file_handler = logging.FileHandler('app.log')
@@ -37,7 +39,7 @@ def setup_logger():
 
     # Create a console handler and set the level to INFO
     console_handler = logging.StreamHandler()
-    console_handler.setLevel(logging.DEBUG)
+    console_handler.setLevel(LOG_LEVEL)
     formatter = CustomFormatter()
     console_handler.setFormatter(formatter)
 

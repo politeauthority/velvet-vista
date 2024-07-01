@@ -48,6 +48,9 @@ class VersionCheck:
 
     def check_service(self, service_name: str, service_user: dict) -> bool:
         local_ver = LocalVersion().run(service_name, service_user)
+        if not local_ver:
+            logging.error(f"{service_name} - Could  not find local version number")
+            return False
         remote_ver = RemoteVersion().run(service_name, service_user)
         self.compare_ver(service_name, local_ver, remote_ver)
         return True

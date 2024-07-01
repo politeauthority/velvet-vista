@@ -8,6 +8,9 @@ import os
 
 import yaml
 
+from velvet_vista.services import SERVICES
+
+
 CONFIG_FILE = "/configs/config.yaml"
 
 
@@ -16,6 +19,7 @@ def load_config() -> dict:
     config_file = read_config_file()
     configs = get_defaults()
     configs.update(config_file)
+    validate_config(configs)
     return configs
 
 
@@ -36,9 +40,15 @@ def get_defaults() -> dict:
         "general": {
             "log_level": "DEBUG",
         },
+        "notfications": {},
         "services": {},
     }
     return defaults
+
+
+def validate_config(configs) -> bool:
+    return True
+    # available_services = SERVICES.keys()
 
 
 global CONFIG
