@@ -6,4 +6,4 @@ resources:
 images:
   - name: politeauthority/velvet-vista
     newName: harbor.squid-ink.us/politeauthority/velvet-vista
-    newTag: 0.0.0.8-dev
+    newTag: 0.0.0.9-dev
